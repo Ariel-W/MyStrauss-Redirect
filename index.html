@@ -55,14 +55,14 @@
 
                 function desktopHandler() {
                     alert('desktopHandler');
-                    if (!sessionStorage.getItem("alreadyRedirected")) {
+                    if (sessionStorage.getItem("alreadyRedirected") === 'false') {
                         alert('alreadyRedirected is FALSE');
                         sessionStorage.setItem("alreadyRedirected", "true");
                         doDeepLink(portalDeepLink);
                     } else {
                         alert('alreadyRedirected is TRUE');
                         sessionStorage.setItem("alreadyRedirected", "false");
-                        window.history.back();
+                        window.history.go(-2);
                     }
                 }
 
