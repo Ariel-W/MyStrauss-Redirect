@@ -8,13 +8,11 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <meta charset="UTF-8">
-    <!-- <link rel="stylesheet" href="styles.css" /> -->
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
     <script>
-        import { useNavigate } from 'react-router-dom';
-
         try {
             document.addEventListener("DOMContentLoaded", () => {
                 const portalDeepLink = "https://teams.microsoft.com/l/entity/2a527703-1f6f-4559-a332-d8a7d288cd88/_djb2_msteams_prefix_3526964105?context=%7B%22channelId%22%3A%2219%3AZxFbn6k1o4nwVbquLy5XcvIRKEOCmRPQoAA1SeXgVpw1%40thread.tacv2%22%7D&tenantId=426c01ed-bddb-499f-bf78-55bdd430cc97";
@@ -31,10 +29,10 @@
 
                 function mobileHandler() {
 
-                    if (!sessionStorage.getItem("alreadyRedirected")) {
+                    if (sessionStorage.getItem("alreadyRedirected") === 'false') {
                         document.addEventListener("visibilitychange", () => {
                             // Check if we've already redirected once in this session
-                            if (sessionStorage.getItem("alreadyRedirected") && !navigatedToHomepage) {
+                            if (sessionStorage.getItem("alreadyRedirected") === 'true' && !navigatedToHomepage) {
                                 navigatedToHomepage = true;
                                 sessionStorage.setItem("alreadyRedirected", "false");
 
@@ -64,9 +62,6 @@
                     } else {
                         console.log('alreadyRedirected is TRUE');
                         sessionStorage.setItem("alreadyRedirected", "false");
-                        console.log(`window.history.length: ${window.history.length}`);
-                        const navigate = useNavigate();
-                        navigate(-1);
                     }
                 }
 
@@ -86,7 +81,7 @@
             console.log(`Error: ${error}`);
         }
     </script>
-    <!-- <img src="background-image.png" alt="Full screen" class="full-screen-img" /> -->
+    <img src="background-image.png" alt="Full screen" class="full-screen-img" />
 </body>
 
 </html>
