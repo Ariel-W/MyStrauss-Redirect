@@ -22,11 +22,7 @@
                 microsoftTeams.initialize();
                 microsoftTeams.executeDeepLink(deepLinkURL);
             }
-            if (!sessionStorage.getItem("alreadyRedirected")) {
-                // First time on this page => set marker and execute the deep link
-                sessionStorage.setItem("alreadyRedirected", "true");
-                doDeepLink(portalDeepLink);
-            }
+            
             document.addEventListener("visibilitychange", () => {
                 // Check if we've already redirected once in this session
                 if (sessionStorage.getItem("alreadyRedirected")) {
@@ -36,8 +32,15 @@
 
                     // Closes Teams (!)
                     // microsoftTeams.tasks.submitTask();
-                } 
+                } else {
+                    // First time on this page => set marker and execute the deep link
+                    sessionStorage.setItem("alreadyRedirected", "true");
+                }
             });
+
+            if (!sessionStorage.getItem("alreadyRedirected")) {
+                doDeepLink(portalDeepLink);
+            }
         });
     } catch (error) {
         // alert(`Error: ${error}`);
