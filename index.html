@@ -46,7 +46,9 @@
                                 microsoftTeams.executeDeepLink(teamsHomepageDeepLinkUrlAlt1);
                                 microsoftTeams.executeDeepLink(teamsHomepageDeepLinkUrlAlt2);
                             } else {
-                                window.history.back();
+                                alert('Desktop Back');
+                                console.log('Desktop Back');
+                                window.history.go(-2);
                             }
 
                             // Closes Teams (!)
