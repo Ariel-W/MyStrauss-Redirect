@@ -62,12 +62,11 @@
                     } else {
                         console.log('alreadyRedirected is TRUE');
                         sessionStorage.setItem("alreadyRedirected", "false");
-                        // console.log(`window.history.length: ${window.history.length}`);
-                        // if (window.history.length > 1) {
-                        //     window.history.back();
-                        // } else {
-                            window.location.href = 'https://teams.microsoft.com';  // Replace with your desired fallback
-                        // }
+                        console.log(`window.history.length: ${window.history.length}`);
+                        for (i = 0, i < window.history.length; i++;) {
+                            console.log(`window.history[${i}]: ${window.history[i]}`);
+                            window.history.back();
+                        }
                     }
                 }
 
