@@ -26,6 +26,7 @@
                     document.addEventListener("visibilitychange", () => {
                         // Check if we've already redirected once in this session
                         if (sessionStorage.getItem("alreadyRedirected")) {
+                            alert('Exiting!!!');
                             sessionStorage.setItem("alreadyRedirected", "false");
                             // Reopen the teams app navigating to its homepage
                             microsoftTeams.executeDeepLink(teamsHomepageDeepLinkUrl);
@@ -38,7 +39,6 @@
                         }
                     });
                     
-                    sessionStorage.setItem("alreadyRedirected", "true");
                     doDeepLink(portalDeepLink);
                 }
             });
