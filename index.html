@@ -24,7 +24,7 @@
                 alert('alreadyRedirected FALSE');
                 // First time on this page => set marker and execute the deep link
                 sessionStorage.setItem("alreadyRedirected", "true");
-                doDeepLink(FinalHubDeepLinkUrl);
+                doDeepLink(MyStraussDeepLinkUrl);
             }
             document.addEventListener("visibilitychange", () => {
                 alert('visibilitychange');
