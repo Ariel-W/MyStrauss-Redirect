@@ -30,6 +30,7 @@
                 function mobileHandler() {
 
                     if (!sessionStorage.getItem("alreadyRedirected") || sessionStorage.getItem("alreadyRedirected") === 'false') {
+                        // alert('alreadyRedirected is FALSE');
                         document.addEventListener("visibilitychange", () => {
                             // Check if we've already redirected once in this session
                             if (sessionStorage.getItem("alreadyRedirected") === 'true' && !navigatedToHomepage) {
@@ -49,8 +50,10 @@
                             }
                         });
 
-                        doDeepLink(portalDeepLink);
                     }
+                    navigatedToHomepage = false;
+                    sessionStorage.setItem("alreadyRedirected", "true");
+                    doDeepLink(portalDeepLink);
                 }
 
                 function desktopHandler() {
@@ -69,8 +72,10 @@
                 const isMobileAgent = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
                 if (isMobileScreen || isMobileAgent) {
+                    // alert('Mobile');
                     mobileHandler();
                 } else {
+                    // alert('Desktop');
                     desktopHandler();
                 }
             });
