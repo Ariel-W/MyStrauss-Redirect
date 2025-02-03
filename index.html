@@ -24,25 +24,21 @@
                     microsoftTeams.initialize();
                     microsoftTeams.executeDeepLink(deepLinkURL);
                 }
-                // if (!sessionStorage.getItem("alreadyRedirected")) {
-                if (!navigatedToHomepage) {
+                if (!sessionStorage.getItem("alreadyRedirected")) {
                     document.addEventListener("visibilitychange", () => {
                         // Check if we've already redirected once in this session
-                        // if (sessionStorage.getItem("alreadyRedirected") && !navigatedToHomepage) {
-                        if (!navigatedToHomepage) {
+                        if (sessionStorage.getItem("alreadyRedirected") && !navigatedToHomepage) {
                             navigatedToHomepage = true;
-                            // sessionStorage.setItem("alreadyRedirected", "false");
-
+                            sessionStorage.setItem("alreadyRedirected", "false");
                             // Reopen the teams app navigating to its homepage
                             microsoftTeams.executeDeepLink(teamsHomepageDeepLinkUrl);
 
                             // Closes Teams (!)
                             // microsoftTeams.tasks.submitTask();
+                        } else {
+                            // First time on this page => set marker and execute the deep link
+                            sessionStorage.setItem("alreadyRedirected", "true");
                         }
-                        //  else {
-                        //     // First time on this page => set marker and execute the deep link
-                        //     sessionStorage.setItem("alreadyRedirected", "true");
-                        // }
                     });
                     
                     doDeepLink(portalDeepLink);
