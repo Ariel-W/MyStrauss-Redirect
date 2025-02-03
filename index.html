@@ -27,53 +27,52 @@
                     microsoftTeams.executeDeepLink(deepLinkURL);
                 }
 
-                // function mobileHandler() {
+                function mobileHandler() {
 
+                    if (!sessionStorage.getItem("alreadyRedirected")) {
+                        document.addEventListener("visibilitychange", () => {
+                            // Check if we've already redirected once in this session
+                            if (sessionStorage.getItem("alreadyRedirected") && !navigatedToHomepage) {
+                                navigatedToHomepage = true;
+                                sessionStorage.setItem("alreadyRedirected", "false");
 
-                if (!sessionStorage.getItem("alreadyRedirected")) {
-                    document.addEventListener("visibilitychange", () => {
-                        // Check if we've already redirected once in this session
-                        if (sessionStorage.getItem("alreadyRedirected") && !navigatedToHomepage) {
-                            navigatedToHomepage = true;
-                            sessionStorage.setItem("alreadyRedirected", "false");
-
-                            const isMobileScreen = window.innerWidth <= 768;
-                            const isMobileAgent = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-                            if (isMobileScreen || isMobileAgent) {
                                 // Reopen the teams app navigating to its homepage
                                 microsoftTeams.executeDeepLink(teamsHomepageDeepLinkUrl);
                                 microsoftTeams.executeDeepLink(teamsHomepageDeepLinkUrlAlt1);
                                 microsoftTeams.executeDeepLink(teamsHomepageDeepLinkUrlAlt2);
+
+                                // Closes Teams (!)
+                                // microsoftTeams.tasks.submitTask();
                             } else {
-                                alert('Desktop Back');
-                                console.log('Desktop Back');
-                                window.history.go(-2);
+                                navigatedToHomepage = false;
+                                sessionStorage.setItem("alreadyRedirected", "true");
                             }
+                        });
 
-                            // Closes Teams (!)
-                            // microsoftTeams.tasks.submitTask();
-                        } else {
-                            // First time on this page => set marker and execute the deep link
-                            navigatedToHomepage = false;
-                            sessionStorage.setItem("alreadyRedirected", "true");
-                        }
-                    });
-
-                    doDeepLink(portalDeepLink);
+                        doDeepLink(portalDeepLink);
+                    }
                 }
-                // }
 
-                // const isMobileScreen = window.innerWidth <= 768;
-                // const isMobileAgent = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                function desktopHandler() {
+                    if (!sessionStorage.getItem("alreadyRedirected")) {
+                        sessionStorage.setItem("alreadyRedirected", "true");
+                        doDeepLink(portalDeepLink);
+                    } else {
+                        sessionStorage.setItem("alreadyRedirected", "false");
+                        window.history.back();
+                    }
+                }
 
-                // if (isMobileScreen || isMobileAgent) {
-                //     alert('Mobile');
-                //     mobileHandler();
-                // } else {
-                //     alert('Desktop');
-                //     doDeepLink(portalDeepLink);
-                // }
+                const isMobileScreen = window.innerWidth <= 768;
+                const isMobileAgent = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+                if (isMobileScreen || isMobileAgent) {
+                    alert('Mobile');
+                    mobileHandler();
+                } else {
+                    alert('Desktop');
+                    desktopHandler();
+                }
             });
         } catch (error) {
             // alert(`Error: ${error}`);
