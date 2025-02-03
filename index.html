@@ -60,6 +60,7 @@
                         doDeepLink(portalDeepLink);
                     } else {
                         sessionStorage.setItem("alreadyRedirected", "false");
+                        microsoftTeams.initialize();
                         microsoftTeams.tasks.submitTask();
                     }
                 }
