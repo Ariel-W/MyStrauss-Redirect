@@ -53,14 +53,14 @@
             }
 
             function desktopHandler() {
-                if (!sessionStorage.getItem("alreadyRedirected") || sessionStorage.getItem("alreadyRedirected") === 'false') {
-                    sessionStorage.setItem("alreadyRedirected", "true");
-                    doDeepLink(portalDeepLink);
-                } else {
-                    sessionStorage.setItem("alreadyRedirected", "false");
-                    microsoftTeams.initialize();
-                    microsoftTeams.tasks.submitTask();
-                }
+                doDeepLink(portalDeepLink);
+                // if (!sessionStorage.getItem("alreadyRedirected") || sessionStorage.getItem("alreadyRedirected") === 'false') {
+                //     sessionStorage.setItem("alreadyRedirected", "true");
+                // } else {
+                //     sessionStorage.setItem("alreadyRedirected", "false");
+                //     microsoftTeams.initialize();
+                //     microsoftTeams.tasks.submitTask();
+                // }
             }
 
             const isMobileScreen = window.innerWidth <= 768;
