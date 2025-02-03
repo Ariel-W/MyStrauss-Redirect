@@ -55,14 +55,22 @@
 
                 function desktopHandler() {
                     alert('desktopHandler');
+                    console.log('desktopHandler');
                     if (sessionStorage.getItem("alreadyRedirected") === 'false') {
                         alert('alreadyRedirected is FALSE');
+                        console.log('alreadyRedirected is FALSE');
                         sessionStorage.setItem("alreadyRedirected", "true");
                         doDeepLink(portalDeepLink);
                     } else {
                         alert('alreadyRedirected is TRUE');
+                        console.log('alreadyRedirected is TRUE');
                         sessionStorage.setItem("alreadyRedirected", "false");
-                        window.history.go(-2);
+                        console.log(`window.history.length: ${window.history.length}`);
+                        if (window.history.length > 1) {
+                            window.history.back();
+                        } else {
+                            window.location.href = 'https://your-fallback-url.com';  // Replace with your desired fallback
+                        }
                     }
                 }
 
@@ -70,10 +78,10 @@
                 const isMobileAgent = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
                 if (isMobileScreen || isMobileAgent) {
-                    alert('Mobile');
+                    console.log('Mobile');
                     mobileHandler();
                 } else {
-                    alert('Desktop');
+                    console.log('Desktop');
                     desktopHandler();
                 }
             });
