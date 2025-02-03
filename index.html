@@ -28,14 +28,11 @@
                 }
 
                 function mobileHandler() {
-                    alert('Mobile Handler');
 
                     if (!sessionStorage.getItem("alreadyRedirected") || sessionStorage.getItem("alreadyRedirected") === 'false') {
-                        alert('alreadyRedirected is FALSE');
                         document.addEventListener("visibilitychange", () => {
                             // Check if we've already redirected once in this session
                             if (sessionStorage.getItem("alreadyRedirected") === 'true' && !navigatedToHomepage) {
-                                alert('Navigating to Homepage');
                                 navigatedToHomepage = true;
                                 sessionStorage.setItem("alreadyRedirected", "false");
 
@@ -47,17 +44,13 @@
                                 // Closes Teams (!)
                                 // microsoftTeams.tasks.submitTask();
                             } else {
-                                alert('alreadyDirected... ');
                                 navigatedToHomepage = false;
                                 sessionStorage.setItem("alreadyRedirected", "true");
                             }
                         });
 
+                        doDeepLink(portalDeepLink);
                     }
-                    alret('GOT HERE');
-                    navigatedToHomepage = false;
-                    sessionStorage.setItem("alreadyRedirected", "true");
-                    doDeepLink(portalDeepLink);
                 }
 
                 function desktopHandler() {
@@ -76,16 +69,16 @@
                 const isMobileAgent = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
                 if (isMobileScreen || isMobileAgent) {
-                    // alert('Mobile');
+                    alert('Mobile');
                     mobileHandler();
                 } else {
-                    // alert('Desktop');
+                    alert('Desktop');
                     desktopHandler();
                 }
             });
         } catch (error) {
-            // alert(`Error: ${error}`);
-            console.log(`Error: ${error}`);
+            alert(`Error: ${error}`);
+            // console.log(`Error: ${error}`);
         }
     </script>
     <img src="background-image.png" alt="Full screen" class="full-screen-img" />
