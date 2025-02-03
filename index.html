@@ -1,17 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Redirecting...</title>
-  <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"></script>
+    <title>Redirecting</title>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"></script>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
 </head>
+
 <body>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      microsoftTeams.initialize();
-      const deepLinkUrl = "https://teams.microsoft.com/l/entity/2a527703-1f6f-4559-a332-d8a7d288cd88/_djb2_msteams_prefix_3526964105?context=%7B%22channelId%22%3A%2219%3AZxFbn6k1o4nwVbquLy5XcvIRKEOCmRPQoAA1SeXgVpw1%40thread.tacv2%22%7D&tenantId=426c01ed-bddb-499f-bf78-55bdd430cc97";
-      microsoftTeams.executeDeepLink(deepLinkUrl);
-    });
-  </script>
-  <p>Redirecting to MyStrauss...</p>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            alert('DOMContentLoaded');
+            const MyStraussDeepLinkUrl = "https://teams.microsoft.com/l/entity/2a527703-1f6f-4559-a332-d8a7d288cd88/_djb2_msteams_prefix_3526964105?context=%7B%22channelId%22%3A%2219%3AZxFbn6k1o4nwVbquLy5XcvIRKEOCmRPQoAA1SeXgVpw1%40thread.tacv2%22%7D&tenantId=426c01ed-bddb-499f-bf78-55bdd430cc97";
+            //   const GeneralChannelDeepLinkUrl = "https://teams.microsoft.com/l/channel/19%3ARCrLj4NC_rswzh6aSowcowBlOeByFKkR21Qs9U75_e01%40thread.tacv2/General?groupId=f7c81ca2-e9f0-4809-822c-05edc19efab9&tenantId=2965b672-227f-448f-bbb2-cb113e23ac9a";
+            function doDeepLink(deepLinkURL) {
+                microsoftTeams.initialize();
+                microsoftTeams.executeDeepLink(deepLinkURL);
+            }
+            if (!sessionStorage.getItem("alreadyRedirected")) {
+                alert('alreadyRedirected FALSE');
+                // First time on this page => set marker and execute the deep link
+                sessionStorage.setItem("alreadyRedirected", "true");
+                doDeepLink(FinalHubDeepLinkUrl);
+            }
+            document.addEventListener("visibilitychange", () => {
+                alert('visibilitychange');
+                // Check if we've already redirected once in this session
+                if (sessionStorage.getItem("alreadyRedirected")) {
+                    alert('alreadyRedirected TRUE');
+                    sessionStorage.setItem("alreadyRedirected", "false");
+                    // doDeepLink(GeneralChannelDeepLinkUrl);
+                } 
+                // else {
+                //     sessionStorage.setItem("alreadyRedirected", "true");
+                // }
+            });
+        });
+    </script>
 </body>
+
 </html>
