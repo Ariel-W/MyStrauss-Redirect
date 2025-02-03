@@ -54,23 +54,20 @@
                 }
 
                 function desktopHandler() {
-                    alert('desktopHandler');
                     console.log('desktopHandler');
                     if (sessionStorage.getItem("alreadyRedirected") === 'false') {
-                        alert('alreadyRedirected is FALSE');
                         console.log('alreadyRedirected is FALSE');
                         sessionStorage.setItem("alreadyRedirected", "true");
                         doDeepLink(portalDeepLink);
                     } else {
-                        alert('alreadyRedirected is TRUE');
                         console.log('alreadyRedirected is TRUE');
                         sessionStorage.setItem("alreadyRedirected", "false");
-                        console.log(`window.history.length: ${window.history.length}`);
-                        if (window.history.length > 1) {
-                            window.history.back();
-                        } else {
+                        // console.log(`window.history.length: ${window.history.length}`);
+                        // if (window.history.length > 1) {
+                        //     window.history.back();
+                        // } else {
                             window.location.href = 'https://teams.microsoft.com';  // Replace with your desired fallback
-                        }
+                        // }
                     }
                 }
 
