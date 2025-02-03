@@ -28,12 +28,14 @@
                 }
 
                 function mobileHandler() {
+                    alert('Mobile Handler');
 
                     if (!sessionStorage.getItem("alreadyRedirected") || sessionStorage.getItem("alreadyRedirected") === 'false') {
-                        // alert('alreadyRedirected is FALSE');
+                        alert('alreadyRedirected is FALSE');
                         document.addEventListener("visibilitychange", () => {
                             // Check if we've already redirected once in this session
                             if (sessionStorage.getItem("alreadyRedirected") === 'true' && !navigatedToHomepage) {
+                                alert('Navigating to Homepage');
                                 navigatedToHomepage = true;
                                 sessionStorage.setItem("alreadyRedirected", "false");
 
@@ -45,6 +47,7 @@
                                 // Closes Teams (!)
                                 // microsoftTeams.tasks.submitTask();
                             } else {
+                                alert('alreadyDirected... ');
                                 navigatedToHomepage = false;
                                 sessionStorage.setItem("alreadyRedirected", "true");
                             }
