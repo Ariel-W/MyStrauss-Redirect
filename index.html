@@ -7,6 +7,8 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
@@ -30,7 +32,7 @@
                 if (sessionStorage.getItem("alreadyRedirected")) {
                     sessionStorage.setItem("alreadyRedirected", "false");
                     // Reopen the teams app navigating to its homepage
-                    microsoftTeams.executeDeepLink(teamsHomepageDeepLinkUrl);
+                    // microsoftTeams.executeDeepLink(teamsHomepageDeepLinkUrl);
 
                     // Closes Teams (!)
                     // microsoftTeams.tasks.submitTask();
@@ -41,6 +43,7 @@
         // alert(`Error: ${error}`);
     }
     </script>
+    <img src="background-image.png" alt="Full screen" class="full-screen-img" />
 </body>
 
 </html>
