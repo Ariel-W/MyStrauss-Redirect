@@ -52,7 +52,7 @@
                 }
 
                 if (!sessionStorage.getItem("alreadyRedirected") || sessionStorage.getItem("alreadyRedirected") === 'false') {
-                    document.getElementById('background-image').src = "background-image-2.png";
+                    document.getElementById('background-image').src = "background-image-1.png";
                     microsoftTeams.initialize();
                     microsoftTeams.executeDeepLink(portalDeepLink);
                 } else {
@@ -62,7 +62,7 @@
             }
 
             function desktopHandler() {
-                document.getElementById('background-image').src = "background-image-1.png";
+                document.getElementById('background-image').src = "background-image-2.png";
                 microsoftTeams.initialize();
                 microsoftTeams.executeDeepLink(portalDeepLink);
             }
