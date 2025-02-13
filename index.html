@@ -14,8 +14,9 @@
 <body>
     <img id="background-image" src="" alt="Full screen" class="full-screen-img" />
     <script>
-        alert('Version 1.0.2');
+        // alert('Version 1.0.3');
         try {
+            sessionStorage.setItem("alreadyRedirected", "false");
             const portalDeepLink = "https://teams.microsoft.com/l/entity/2a527703-1f6f-4559-a332-d8a7d288cd88/_djb2_msteams_prefix_3526964105?context=%7B%22channelId%22%3A%2219%3AZxFbn6k1o4nwVbquLy5XcvIRKEOCmRPQoAA1SeXgVpw1%40thread.tacv2%22%7D&tenantId=426c01ed-bddb-499f-bf78-55bdd430cc97";
             const teamsHomepageDeepLinkUrl = "msteams://teams.microsoft.com";
             const teamsHomepageDeepLinkUrlAlt1 = "ms.teams://teams.microsoft.com";
@@ -29,16 +30,16 @@
             // }
 
             function mobileHandler() {
-                alert('mobileHandler triggered');
+                // alert('mobileHandler triggered');
                 if (!visibilityEventListened) {
-                    alert('visibilityEventListened is false');
+                    // alert('visibilityEventListened is false');
                     visibilityEventListened = true;
 
                     document.addEventListener("visibilitychange", () => {
-                        alert('visibilitychange triggered');
+                        // alert('visibilitychange triggered');
                         // Check if we've already redirected once in this session
                         if (sessionStorage.getItem("alreadyRedirected") === 'true') {
-                            alert('visibilitychange alreadyRedirected === true');
+                            // alert('visibilitychange alreadyRedirected === true');
                             // Apply the image URL to the img tag
                             document.getElementById('background-image').src = "background-image-1.png";
                             sessionStorage.setItem("alreadyRedirected", "false");
@@ -51,19 +52,18 @@
                             }, 2000);
                         } else {
                             sessionStorage.setItem("alreadyRedirected", "true");
-                            alert('visibilitychange alreadyRedirected === false');
+                            // alert('visibilitychange alreadyRedirected === false');
                         }
                     });
                 }
 
-                alert(`sessionStorage: ${sessionStorage.getItem("alreadyRedirected")}`);
                 if (!sessionStorage.getItem("alreadyRedirected") || sessionStorage.getItem("alreadyRedirected") === 'false') {
-                    alert('Should navigate...');
+                    // alert('Should navigate...');
                     document.getElementById('background-image').src = "background-image-2.png";
                     microsoftTeams.initialize();
                     microsoftTeams.executeDeepLink(portalDeepLink);
                 } else {
-                    alert('SOULDNT GET HERE');
+                    // alert('SOULDNT GET HERE');
                     console.log('SOULDNT GET HERE');
                 }
             }
@@ -78,10 +78,10 @@
             const isMobileAgent = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
             if (isMobileScreen || isMobileAgent) {
-                alert('mobileHandler');
+                // alert('mobileHandler');
                 mobileHandler();
             } else {
-                alert('desktopHandler');
+                // alert('desktopHandler');
                 desktopHandler();
             }
         } catch (error) {
