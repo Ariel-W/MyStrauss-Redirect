@@ -71,8 +71,10 @@
             const isMobileAgent = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
             if (isMobileScreen || isMobileAgent) {
+                alert('mobileHandler');
                 mobileHandler();
             } else {
+                alert('desktopHandler');
                 desktopHandler();
             }
         } catch (error) {
