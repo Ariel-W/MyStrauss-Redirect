@@ -14,7 +14,7 @@
 <body>
     <img id="background-image" src="" alt="Full screen" class="full-screen-img" />
     <script>
-        alert('Version 1.0.13');
+        alert('Version 1.0.14');
         try {
             
             function mobileHandler() {
@@ -33,9 +33,10 @@
                             setTimeout(() => {
                                 // Reopen the teams app navigating to its homepage
                                 microsoftTeams.initialize();
-                                microsoftTeams.executeDeepLink('teams://teams.microsoft.com');
-                                microsoftTeams.executeDeepLink('ms.teams://teams.microsoft.com');
-                                microsoftTeams.executeDeepLink('msteams://teams.microsoft.com');
+                                microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/channel/19%3AZxFbn6k1o4nwVbquLy5XcvIRKEOCmRPQoAA1SeXgVpw1%40thread.tacv2/%D7%94%D7%95%D7%93%D7%A2%D7%95%D7%AA%20%D7%95%D7%A2%D7%93%D7%9B%D7%95%D7%A0%D7%99%D7%9D%20%D7%90%D7%A8%D7%92%D7%95%D7%A0%D7%99%D7%99%D7%9D?groupId=e5ba4f8b-ff95-41ad-8c08-cf2e622add5c&tenantId=');
+                                // microsoftTeams.executeDeepLink('teams://teams.microsoft.com');
+                                // microsoftTeams.executeDeepLink('ms.teams://teams.microsoft.com');
+                                // microsoftTeams.executeDeepLink('msteams://teams.microsoft.com');
                             }, 2000);
                         } else if (sessionStorage.getItem("navigationState") === 'exitedPortal'){
                             alert('visibilitychange navigationState: exitedPortal => enteringPortal');
