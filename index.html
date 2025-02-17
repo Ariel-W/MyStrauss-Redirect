@@ -14,7 +14,7 @@
 <body>
     <img id="background-image" src="" alt="Full screen" class="full-screen-img" />
     <script>
-        alert('Version 1.0.11');
+        alert('Version 1.0.13');
         try {
             
             function mobileHandler() {
@@ -33,9 +33,9 @@
                             setTimeout(() => {
                                 // Reopen the teams app navigating to its homepage
                                 microsoftTeams.initialize();
-                                microsoftTeams.executeDeepLink('msteams://teams.microsoft.com');
-                                microsoftTeams.executeDeepLink('ms.teams://teams.microsoft.com');
                                 microsoftTeams.executeDeepLink('teams://teams.microsoft.com');
+                                microsoftTeams.executeDeepLink('ms.teams://teams.microsoft.com');
+                                microsoftTeams.executeDeepLink('msteams://teams.microsoft.com');
                             }, 2000);
                         } else if (sessionStorage.getItem("navigationState") === 'exitedPortal'){
                             alert('visibilitychange navigationState: exitedPortal => enteringPortal');
