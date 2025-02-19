@@ -14,38 +14,48 @@
 <body>
     <img id="background-image" src="" alt="Full screen" class="full-screen-img" />
     <script>
-        alert('Version 1.0.8');
+        alert('Version 1.0.15');
         try {
             
             function mobileHandler() {
-                alert('mobileHandler triggered');
-                if (!sessionStorage.getItem("navigationState") || sessionStorage.getItem("navigationState") === 'false') {
-                    alert('navigationState not set or false');
+                // alert('mobileHandler triggered');
+                if (!sessionStorage.getItem("navigationState")) {
+                    alert('navigationState not set => first navigation');
 
                     document.addEventListener("visibilitychange", () => {
-                        alert('visibilitychange triggered');
+                        // alert('visibilitychange triggered');
                         // Check if we've already redirected once in this session
-                        if (sessionStorage.getItem("navigationState") === 'true') {
-                            alert('visibilitychange navigationState === true');
+                        if (sessionStorage.getItem("navigationState") === 'inPortal') {
+                            alert('visibilitychange navigationState: inPortal => leavingPortal');
                             // Apply the image URL to the img tag
                             document.getElementById('background-image').src = "background-image-exit.png";
-                            sessionStorage.setItem("navigationState", "false");
+                            sessionStorage.setItem("navigationState", "leavingPortal");
                             setTimeout(() => {
                                 // Reopen the teams app navigating to its homepage
                                 microsoftTeams.initialize();
-                                microsoftTeams.executeDeepLink('msteams://teams.microsoft.com');
-                                microsoftTeams.executeDeepLink('ms.teams://teams.microsoft.com');
-                                microsoftTeams.executeDeepLink('teams://teams.microsoft.com');
+                                // microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/channel/19%3AZxFbn6k1o4nwVbquLy5XcvIRKEOCmRPQoAA1SeXgVpw1%40thread.tacv2/%D7%94%D7%95%D7%93%D7%A2%D7%95%D7%AA%20%D7%95%D7%A2%D7%93%D7%9B%D7%95%D7%A0%D7%99%D7%9D%20%D7%90%D7%A8%D7%92%D7%95%D7%A0%D7%99%D7%99%D7%9D?groupId=e5ba4f8b-ff95-41ad-8c08-cf2e622add5c&tenantId=');
+                                // microsoftTeams.executeDeepLink('teams://teams.microsoft.com');
+                                // microsoftTeams.executeDeepLink('ms.teams://teams.microsoft.com');
+                                // microsoftTeams.executeDeepLink('msteams://teams.microsoft.com');
                             }, 2000);
-                        } else {
-                            sessionStorage.setItem("navigationState", "true");
-                            alert('visibilitychange navigationState === false');
+                        } else if (sessionStorage.getItem("navigationState") === 'exitedPortal'){
+                            alert('visibilitychange navigationState: exitedPortal => enteringPortal');
+                            sessionStorage.setItem("navigationState", "enteringPortal");
+                            document.getElementById('background-image').src = "background-image-entrance.png";
+                            microsoftTeams.initialize();
+                            // Portal Link
+                            microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/2a527703-1f6f-4559-a332-d8a7d288cd88/_djb2_msteams_prefix_3526964105?context=%7B%22channelId%22%3A%2219%3AZxFbn6k1o4nwVbquLy5XcvIRKEOCmRPQoAA1SeXgVpw1%40thread.tacv2%22%7D&tenantId=426c01ed-bddb-499f-bf78-55bdd430cc97');
+                        } else if (sessionStorage.getItem("navigationState") === 'leavingPortal'){
+                            alert('visibilitychange navigationState: leavingPortal => exitedPortal');
+                            sessionStorage.setItem("navigationState", "exitedPortal");
+                        } else if (sessionStorage.getItem("navigationState") === 'enteringPortal') {
+                            alert('visibilitychange navigationState: enteringPortal => inPortal');
+                            sessionStorage.setItem("navigationState", "inPortal");
                         }
                     });
-                }
-
-                if (!sessionStorage.getItem("navigationState") || sessionStorage.getItem("navigationState") === 'false') {
-                    alert('Should navigate...');
+                
+                    alert('enteringPortal main function...');
+                    sessionStorage.setItem("navigationState", "enteringPortal");
                     document.getElementById('background-image').src = "background-image-entrance.png";
                     microsoftTeams.initialize();
                     // Portal Link
